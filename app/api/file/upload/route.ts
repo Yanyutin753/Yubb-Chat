@@ -4,6 +4,7 @@ import { auth } from "@/app/api/auth";
 import LocalFileStorage from "@/app/utils/local_file_storage";
 import { getServerSideConfig } from "@/app/config/server";
 import S3FileStorage from "@/app/utils/s3_file_storage";
+import mime from 'mime-types';
 
 async function handle(req: NextRequest) {
   if (req.method === "OPTIONS") {
@@ -24,6 +25,15 @@ async function handle(req: NextRequest) {
     const imageReader = image.stream().getReader();
     const imageData: number[] = [];
 
+    // 获取文件的 MIME 类型
+    const mimeType = image.type; 
+    // 根据 MIME 类型获取文件后缀
+    let extension = mime.extension(mimeType); 
+    // 如果无法确定文件类型，使用 'png' 作为默认后缀
+
+    if (!extension) {
+      extension = 'png';
+    }
     while (true) {
       const { done, value } = await imageReader.read();
       if (done) break;
@@ -32,7 +42,8 @@ async function handle(req: NextRequest) {
 
     const buffer = Buffer.from(imageData);
 
-    var fileName = `${Date.now()}.png`;
+    // 使用获取到的文件后缀
+    var fileName = `${Date.now()}.${extension}`;
     var filePath = "";
     const serverConfig = getServerSideConfig();
     if (serverConfig.isStoreFileToLocal) {
