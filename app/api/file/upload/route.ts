@@ -24,37 +24,37 @@ async function handle(req: NextRequest) {
     const imageReader = image.stream().getReader();
     const imageData: number[] = [];
 
-    // 获取文件名
-    const true_fileName = image.name;
-    console.log(true_fileName);
+    // // 获取文件名
+    // const true_fileName = image.name;
+    // console.log(true_fileName);
 
-    const mimeToExtension: { [key: string]: string } = {
-      'image/png': 'png',
-      'image/jpeg': 'jpg',
-      'image/webp': 'webp',
-      'image/gif': 'gif',
-      'image/bmp': 'bmp',
-      'image/svg+xml': 'svg',
-      'text/plain': 'txt',
-      'text/html': 'html',
-      'text/css': 'css',
-      'text/csv': 'csv',
-      'application/pdf': 'pdf',
-      'application/msword': 'doc',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'docx',
-      'application/vnd.ms-excel': 'xls',
-      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
-      'application/vnd.ms-powerpoint': 'ppt',
-      'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'pptx',
-      'application/json': 'json',
-      'application/xml': 'xml',
-      'application/zip': 'zip',
-      'application/x-rar-compressed': 'rar',
-      'application/javascript': 'js',
-      'application/octet-stream': 'bin',
-    };    
+    // const mimeToExtension: { [key: string]: string } = {
+    //   'image/png': 'png',
+    //   'image/jpeg': 'jpg',
+    //   'image/webp': 'webp',
+    //   'image/gif': 'gif',
+    //   'image/bmp': 'bmp',
+    //   'image/svg+xml': 'svg',
+    //   'text/plain': 'txt',
+    //   'text/html': 'html',
+    //   'text/css': 'css',
+    //   'text/csv': 'csv',
+    //   'application/pdf': 'pdf',
+    //   'application/msword': 'doc',
+    //   'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'docx',
+    //   'application/vnd.ms-excel': 'xls',
+    //   'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
+    //   'application/vnd.ms-powerpoint': 'ppt',
+    //   'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'pptx',
+    //   'application/json': 'json',
+    //   'application/xml': 'xml',
+    //   'application/zip': 'zip',
+    //   'application/x-rar-compressed': 'rar',
+    //   'application/javascript': 'js',
+    //   'application/octet-stream': 'bin',
+    // };    
     
-    const extension = mimeToExtension[image.type] || 'txt';    
+    // const extension = mimeToExtension[image.type] || 'txt';    
 
     while (true) {
       const { done, value } = await imageReader.read();
@@ -65,7 +65,7 @@ async function handle(req: NextRequest) {
     const buffer = Buffer.from(imageData);
 
     // 使用获取到的文件后缀
-    var fileName = `${Date.now()}.${extension}`;
+    var fileName = image.name;
     var filePath = "";
     const serverConfig = getServerSideConfig();
     if (serverConfig.isStoreFileToLocal) {
