@@ -122,9 +122,15 @@ function _MarkDownContent(props: { content: string; imageBase64?: string }) {
     [props.content],
   );
 
+  const isImage = (base64: any) => {
+    const mime = base64.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/);
+    if (!mime || !mime[1]) return false;
+    return mime[1].startsWith("image/");
+  };
+
   return (
     <div style={{ fontSize: "inherit" }}>
-      {props.imageBase64 && <img src={props.imageBase64} alt="" />}
+      {props.imageBase64 && isImage(props.imageBase64) && <img src={props.imageBase64} alt="" />}
       <ReactMarkdown
         remarkPlugins={[RemarkMath, RemarkGfm, RemarkBreaks]}
         rehypePlugins={[

@@ -24,8 +24,18 @@ async function handle(req: NextRequest) {
     const imageReader = image.stream().getReader();
     const imageData: number[] = [];
 
-    const extension = image.type.split('/')[1] || 'png';
-
+    const mimeToExtension: { [key: string]: string } = {
+      'image/png': 'png',
+      'image/jpeg': 'jpg',
+      'image/webp': 'webp',
+      'text/plain': 'txt',
+      'application/pdf': 'pdf',
+      'application/msword': 'doc',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'docx',
+    };
+    
+    const extension = mimeToExtension[image.type] || 'png';    
+    
     while (true) {
       const { done, value } = await imageReader.read();
       if (done) break;
