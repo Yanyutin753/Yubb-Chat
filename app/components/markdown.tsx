@@ -131,7 +131,7 @@ function _MarkDownContent(props: { content: string; imageBase64?: string }) {
     <div style={{ fontSize: "inherit" }}>
       {props.imageBase64 && isImage(props.imageBase64) && <img src={props.imageBase64} alt="" />}
       {props.imageBase64 && !isImage(props.imageBase64) &&
-        <a href={props.imageBase64} style={{ marginBottom: '8px', fontWeight: 'bold' }}>
+        <a href={props.imageBase64} style={{ fontWeight: 'bold' }}>
           文件：{props.imageBase64}
         </a>
       }
@@ -183,7 +183,7 @@ export function Markdown(
       className="markdown-body"
       style={{
         fontSize: `${props.fontSize ?? 14}px`,
-        whiteSpace: 'pre-wrap', // Add this line
+        wordWrap: 'break-word',
       }}
       ref={mdRef}
       onContextMenu={props.onContextMenu}
