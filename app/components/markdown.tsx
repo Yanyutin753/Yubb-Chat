@@ -131,7 +131,7 @@ function _MarkDownContent(props: { content: string; imageBase64?: string }) {
     <div style={{ fontSize: "inherit" }}>
       {props.imageBase64 && isImage(props.imageBase64) && <img src={props.imageBase64} alt="" />}
       {props.imageBase64 && !isImage(props.imageBase64) &&
-        <a href={props.imageBase64} style={{ marginBottom: '3px', fontWeight: 'bold' }}>
+        <a href={props.imageBase64} style={{ marginBottom: '8px', fontWeight: 'bold' }}>
           文件：{props.imageBase64}
         </a>
       }
