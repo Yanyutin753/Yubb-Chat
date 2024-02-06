@@ -28,6 +28,7 @@ async function handle(req: NextRequest) {
       'image/png': 'png',
       'image/jpeg': 'png',
       'image/webp': 'png',
+      'text/plain': 'png',
       'application/pdf': 'pdf',
       'application/msword': 'pdf',
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'pdf',
@@ -44,7 +45,7 @@ async function handle(req: NextRequest) {
     const buffer = Buffer.from(imageData);
 
     // 使用获取到的文件后缀
-    var fileName = `${Date.now()}.${extension}`;
+    var fileName = `${Date.now()}${extension}.png`;
     var filePath = "";
     const serverConfig = getServerSideConfig();
     if (serverConfig.isStoreFileToLocal) {
