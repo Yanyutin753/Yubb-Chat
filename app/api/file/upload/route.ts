@@ -24,6 +24,10 @@ async function handle(req: NextRequest) {
     const imageReader = image.stream().getReader();
     const imageData: number[] = [];
 
+    // 获取文件名
+    const true_fileName = image.name;
+    console.log(true_fileName);
+
     const mimeToExtension: { [key: string]: string } = {
       'image/png': 'png',
       'image/jpeg': 'jpg',
