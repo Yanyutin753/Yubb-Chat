@@ -102,10 +102,41 @@ export class ChatGPTApi implements LLMApi {
         });
         if (v.image_url) {
           var base64Data = await getImageBase64Data(v.image_url);
+          interface MIMEMap {
+            [key: string]: string;
+          }
+          
+          const extensionToMIME: MIMEMap = {
+            'png': 'image/png',
+            'jpg': 'image/jpeg',
+            'webp': 'image/webp',
+            'txt': 'text/plain',
+            'pdf': 'application/pdf',
+            'doc': 'application/msword',
+            'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+          };
+          
+          let mimeType: string | undefined;
+          try {
+            // 使用正则表达式获取文件后缀
+            const match = v.image_url.match(/\.(\w+)$/);
+            if (match) {
+              const fileExtension = match[1];
+              mimeType = extensionToMIME[fileExtension];
+              if (!mimeType) {
+                throw new Error('Unknown file extension: ' + fileExtension);
+              }
+            } else {
+              throw new Error('Unable to extract file extension from the URL');
+            }
+          } catch (error) {
+            mimeType = 'image/jpeg';  // 使用通用的MIME类型
+          }
+          console.log(mimeType);
           message.content.push({
             type: "image_url",
             image_url: {
-              url: `data:image/jpeg;base64,${base64Data}`,
+              url: `data:${mimeType};base64,${base64Data}`,
             },
           });
         }
@@ -226,7 +257,7 @@ export class ChatGPTApi implements LLMApi {
               try {
                 const resJson = await res.clone().json();
                 extraInfo = prettyObject(resJson);
-              } catch {}
+              } catch { }
 
               if (res.status === 401) {
                 responseTexts.push(Locale.Error.Unauthorized);

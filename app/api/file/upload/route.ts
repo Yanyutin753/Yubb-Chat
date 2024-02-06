@@ -28,10 +28,10 @@ async function handle(req: NextRequest) {
       'image/png': 'png',
       'image/jpeg': 'png',
       'image/webp': 'png',
-      'text/plain': 'png',
+      'text/plain': 'txt',
       'application/pdf': 'pdf',
-      'application/msword': 'pdf',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'pdf',
+      'application/msword': 'doc',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'docx',
     };
     
     const extension = mimeToExtension[image.type] || 'png';    
@@ -45,7 +45,7 @@ async function handle(req: NextRequest) {
     const buffer = Buffer.from(imageData);
 
     // 使用获取到的文件后缀
-    var fileName = `${Date.now()}${extension}.png`;
+    var fileName = `${Date.now()}.${extension}`;
     var filePath = "";
     const serverConfig = getServerSideConfig();
     if (serverConfig.isStoreFileToLocal) {
