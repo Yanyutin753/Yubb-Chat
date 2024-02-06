@@ -102,7 +102,15 @@ export class ChatGPTApi implements LLMApi {
         });
         if (v.image_url) {
           var base64Data = await getImageBase64Data(v.image_url);
-          message.content.push({
+          if(v.image_url.endsWith('pdf.png')){
+            message.content.push({
+              type: "image_url",
+              image_url: {
+                url: `data:application/pdf,${base64Data}`,
+              },
+            });
+          }
+          else message.content.push({
             type: "image_url",
             image_url: {
               url: `data:image/jpeg;base64,${base64Data}`,
