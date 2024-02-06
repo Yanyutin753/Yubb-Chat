@@ -26,8 +26,8 @@ async function handle(req: NextRequest) {
 
     const mimeToExtension: { [key: string]: string } = {
       'image/png': 'png',
-      'image/jpeg': 'jpg',
-      'image/webp': 'webp',
+      'image/jpeg': 'png',
+      'image/webp': 'png',
       'text/plain': 'txt',
       'application/pdf': 'pdf',
       'application/msword': 'doc',
@@ -35,7 +35,7 @@ async function handle(req: NextRequest) {
     };
     
     const extension = mimeToExtension[image.type] || 'png';    
-    
+
     while (true) {
       const { done, value } = await imageReader.read();
       if (done) break;

@@ -122,10 +122,9 @@ function _MarkDownContent(props: { content: string; imageBase64?: string }) {
     [props.content],
   );
 
+  // 判断文件路径
   const isImage = (base64: any) => {
-    const mime = base64.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/);
-    if (!mime || !mime[1]) return false;
-    return mime[1].startsWith("image/");
+    return base64.endsWith('png');
   };
 
   return (
