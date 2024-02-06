@@ -28,10 +28,10 @@ async function handle(req: NextRequest) {
       'image/png': 'png',
       'image/jpeg': 'png',
       'image/webp': 'png',
-      'text/plain': 'txt',
+      'text/plain': 'png',
       'application/pdf': 'pdf',
-      'application/msword': 'doc',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'docx',
+      'application/msword': 'pdf',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'pdf',
     };
     
     const extension = mimeToExtension[image.type] || 'png';    
