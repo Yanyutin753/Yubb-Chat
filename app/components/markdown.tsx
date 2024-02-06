@@ -130,7 +130,12 @@ function _MarkDownContent(props: { content: string; imageBase64?: string }) {
   return (
     <div style={{ fontSize: "inherit" }}>
       {props.imageBase64 && isImage(props.imageBase64) && <img src={props.imageBase64} alt="" />}
-      {props.imageBase64 && !isImage(props.imageBase64) && <a href={props.imageBase64}>```文件：{props.imageBase64}```</a>}
+      {props.imageBase64 && !isImage(props.imageBase64) &&
+        <a href={props.imageBase64} style={{ marginBottom: '3px', fontWeight: 'bold' }}>
+          文件：{props.imageBase64}
+        </a>
+      }
+
       <ReactMarkdown
         remarkPlugins={[RemarkMath, RemarkGfm, RemarkBreaks]}
         rehypePlugins={[
