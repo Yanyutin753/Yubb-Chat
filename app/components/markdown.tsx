@@ -127,12 +127,16 @@ function _MarkDownContent(props: { content: string; imageBase64?: string }) {
     return base64.endsWith('.png');
   };
 
+  const show_filename = (base64: any) => {
+    let parts = base64.split("/");
+    return parts.pop();
+  };
   return (
     <div style={{ fontSize: "inherit" }}>
       {props.imageBase64 && isImage(props.imageBase64) && <img src={props.imageBase64} alt="" />}
       {props.imageBase64 && !isImage(props.imageBase64) &&
-        <a href={props.imageBase64} style={{ fontWeight: 'bold' }}>
-          文件：{props.imageBase64}
+        <a href={props.imageBase64} style={{ fontWeight: 'bold'}}>
+          文件：{show_filename(props.imageBase64)}
         </a>
       }
 
