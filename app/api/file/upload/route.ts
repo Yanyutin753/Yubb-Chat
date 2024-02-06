@@ -28,7 +28,6 @@ async function handle(req: NextRequest) {
       'image/png': 'png',
       'image/jpeg': 'png',
       'image/webp': 'png',
-      'text/plain': 'png',
       'application/pdf': 'pdf',
       'application/msword': 'pdf',
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'pdf',
