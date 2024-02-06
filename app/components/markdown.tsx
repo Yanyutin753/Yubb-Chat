@@ -183,6 +183,7 @@ export function Markdown(
       className="markdown-body"
       style={{
         fontSize: `${props.fontSize ?? 14}px`,
+        whiteSpace: 'pre-wrap', // Add this line
       }}
       ref={mdRef}
       onContextMenu={props.onContextMenu}
