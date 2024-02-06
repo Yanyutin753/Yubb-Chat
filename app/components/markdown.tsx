@@ -122,9 +122,14 @@ function _MarkDownContent(props: { content: string; imageBase64?: string }) {
     [props.content],
   );
 
+  // 判断文件路径
+  const isImage = (base64: any) => {
+    return base64.endsWith('png.png');
+  };
+
   return (
     <div style={{ fontSize: "inherit" }}>
-      {props.imageBase64 && <img src={props.imageBase64} alt="" />}
+      {props.imageBase64 && isImage(props.imageBase64) && <img src={props.imageBase64} alt="" />}
       <ReactMarkdown
         remarkPlugins={[RemarkMath, RemarkGfm, RemarkBreaks]}
         rehypePlugins={[
