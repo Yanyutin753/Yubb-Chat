@@ -623,13 +623,13 @@ export function ChatActions(props: {
         {currentModel.includes("vision") && (
           <ChatAction
             onClick={selectImage}
-            text="选择图片"
+            text="选择文件"
             loding={uploadLoading}
             icon={<UploadIcon />}
             innerNode={
               <input
                 type="file"
-                accept=".png,.jpg,.webp,.jpeg"
+                accept=".png,.jpg,.webp,.jpeg,.txt,.pdf,.doc,.docx"
                 id="chat-image-file-select-upload"
                 style={{ display: "none" }}
                 onChange={onImageSelected}

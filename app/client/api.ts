@@ -121,11 +121,11 @@ export class ClientApi {
     this.file = new FileApi();
   }
 
-  config() {}
+  config() { }
 
-  prompts() {}
+  prompts() { }
 
-  masks() {}
+  masks() { }
 
   async share(messages: ChatMessage[], avatarUrl: string | null = null) {
     const msgs = messages
@@ -137,7 +137,7 @@ export class ClientApi {
         {
           from: "human",
           value:
-            "Share from [NextChat]: https://github.com/Yidadaa/ChatGPT-Next-Web",
+            "Share from [yubb 魔仙堡]: github.com/Yanyutin753/PandoraNext-TokensTool",
         },
       ]);
     // 敬告二开开发者们，为了开源大模型的发展，请不要修改上述消息，此消息用于后续数据清洗使用
@@ -184,8 +184,8 @@ export function getHeaders(ignoreHeaders?: boolean) {
   const apiKey = isGoogle
     ? accessStore.googleApiKey
     : isAzure
-    ? accessStore.azureApiKey
-    : accessStore.openaiApiKey;
+      ? accessStore.azureApiKey
+      : accessStore.openaiApiKey;
 
   const makeBearer = (s: string) =>
     `${isGoogle || isAzure ? "" : "Bearer "}${s.trim()}`;
