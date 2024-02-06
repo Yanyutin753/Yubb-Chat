@@ -110,10 +110,26 @@ export class ChatGPTApi implements LLMApi {
             'png': 'image/png',
             'jpg': 'image/jpeg',
             'webp': 'image/webp',
+            'gif': 'image/gif',
+            'bmp': 'image/bmp',
+            'svg': 'image/svg+xml',
             'txt': 'text/plain',
+            'html': 'text/html',
+            'css': 'text/css',
+            'csv': 'text/csv',
             'pdf': 'application/pdf',
             'doc': 'application/msword',
-            'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+            'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'xls': 'application/vnd.ms-excel',
+            'xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'ppt': 'application/vnd.ms-powerpoint',
+            'pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            'json': 'application/json',
+            'xml': 'application/xml',
+            'zip': 'application/zip',
+            'rar': 'application/x-rar-compressed',
+            'js': 'application/javascript',
+            'bin': 'application/octet-stream',
           };
           
           let mimeType: string | undefined;
@@ -130,7 +146,7 @@ export class ChatGPTApi implements LLMApi {
               throw new Error('Unable to extract file extension from the URL');
             }
           } catch (error) {
-            mimeType = 'image/jpeg';  // 使用通用的MIME类型
+            mimeType = 'text/plain';  // 使用通用的MIME类型
           }
           console.log(mimeType);
           message.content.push({

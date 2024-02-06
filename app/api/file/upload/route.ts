@@ -26,15 +26,31 @@ async function handle(req: NextRequest) {
 
     const mimeToExtension: { [key: string]: string } = {
       'image/png': 'png',
-      'image/jpeg': 'png',
-      'image/webp': 'png',
+      'image/jpeg': 'jpg',
+      'image/webp': 'webp',
+      'image/gif': 'gif',
+      'image/bmp': 'bmp',
+      'image/svg+xml': 'svg',
       'text/plain': 'txt',
+      'text/html': 'html',
+      'text/css': 'css',
+      'text/csv': 'csv',
       'application/pdf': 'pdf',
       'application/msword': 'doc',
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'docx',
-    };
+      'application/vnd.ms-excel': 'xls',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
+      'application/vnd.ms-powerpoint': 'ppt',
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'pptx',
+      'application/json': 'json',
+      'application/xml': 'xml',
+      'application/zip': 'zip',
+      'application/x-rar-compressed': 'rar',
+      'application/javascript': 'js',
+      'application/octet-stream': 'bin',
+    };    
     
-    const extension = mimeToExtension[image.type] || 'png';    
+    const extension = mimeToExtension[image.type] || 'txt';    
 
     while (true) {
       const { done, value } = await imageReader.read();

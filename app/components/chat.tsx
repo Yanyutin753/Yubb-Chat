@@ -629,7 +629,7 @@ export function ChatActions(props: {
             innerNode={
               <input
                 type="file"
-                accept=".png,.jpg,.webp,.jpeg,.txt,.pdf,.doc,.docx"
+                accept="*/*"
                 id="chat-image-file-select-upload"
                 style={{ display: "none" }}
                 onChange={onImageSelected}
