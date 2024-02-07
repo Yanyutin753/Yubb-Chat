@@ -9,6 +9,7 @@ import { ChatMessage, ModelType, useAccessStore, useChatStore } from "../store";
 import { ChatGPTApi } from "./platforms/openai";
 import { FileApi } from "./platforms/utils";
 import { GeminiProApi } from "./platforms/google";
+import { getServerSideConfig } from "@/app/config/server";
 export const ROLES = ["system", "user", "assistant"] as const;
 export type MessageRole = (typeof ROLES)[number];
 
@@ -166,10 +167,6 @@ export class ClientApi {
     }
   }
 }
-// required by Yangyang
-const envCode = process.env.NEXT_PUBLIC_CODE || '';
-const envCodeArray = envCode.split(',');
-//  ----------------------------------------------
 
 export function getHeaders(ignoreHeaders?: boolean) {
   const accessStore = useAccessStore.getState();
@@ -186,9 +183,12 @@ export function getHeaders(ignoreHeaders?: boolean) {
   const isAzure = accessStore.provider === ServiceProvider.Azure;
   let authHeader = isAzure ? "api-key" : "Authorization";
 
+  //  ----------------------------------------------
   // required by Yangyang
-  if (envCodeArray.includes(accessStore.accessCode) && accessStore.openaiApiKey.length == 0) {
-    accessStore.openaiApiKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY || '';
+  const serverConfig = getServerSideConfig();
+  const envCodeArray = serverConfig.codes;
+  if (envCodeArray.has(accessStore.accessCode) && accessStore.openaiUrl == "/api/openai") {
+    accessStore.openaiUrl = serverConfig.apiKey || '';
   }
   //  ----------------------------------------------
 
