@@ -540,8 +540,7 @@ export function ChatActions(props: {
         }
       }
     };
-    if (currentModel.includes("vision") && accessStore.isAuthorized()) {
-      console.log(accessStore.isAuthorized()+"asdasdasdasdasdas");
+    if (currentModel.includes("vision")) {
       window.addEventListener("paste", onPaste);
       return () => {
         window.removeEventListener("paste", onPaste);
