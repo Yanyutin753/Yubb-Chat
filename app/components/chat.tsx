@@ -503,8 +503,13 @@ export function ChatActions(props: {
   );
   const [showModelSelector, setShowModelSelector] = useState(false);
 
+  const accessStore = useAccessStore();
+  
+  let isLogin = () => {
+    return accessStore.isAuthorized();
+  }
+
   useEffect(() => {
-    const accessStore = useAccessStore();
     // if current model is not available
     // switch to first available model
     const isUnavaliableModel = !models.some((m) => m.name === currentModel);
@@ -539,7 +544,7 @@ export function ChatActions(props: {
         }
       }
     };
-    if (currentModel.includes("vision") && accessStore.isAuthorized()) {
+    if (currentModel.includes("vision") && isLogin) {
       window.addEventListener("paste", onPaste);
       return () => {
         window.removeEventListener("paste", onPaste);
