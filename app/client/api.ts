@@ -167,6 +167,9 @@ export class ClientApi {
   }
 }
 
+const envCode = process.env.CODE || "";
+const envCodeArray = envCode.split(',');
+
 export function getHeaders(ignoreHeaders?: boolean) {
   const accessStore = useAccessStore.getState();
   const envCode = process.env.CODE;
@@ -182,7 +185,7 @@ export function getHeaders(ignoreHeaders?: boolean) {
   }
   const isAzure = accessStore.provider === ServiceProvider.Azure;
   let authHeader = isAzure ? "api-key" : "Authorization";
-  if(envCode?.includes(accessStore.accessCode) && accessStore.openaiApiKey.length == 0){
+  if(envCodeArray.includes(accessStore.accessCode) && accessStore.openaiApiKey.length == 0){
     accessStore.openaiApiKey = process.env.OPENAI_API_KEY || "";
   }
   const apiKey = isGoogle

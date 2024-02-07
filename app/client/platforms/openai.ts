@@ -35,6 +35,9 @@ export interface OpenAIListModelResponse {
   }>;
 }
 
+const envCode = process.env.CODE || "";
+const envCodeArray = envCode.split(',');
+
 export class ChatGPTApi implements LLMApi {
   private disableListModels = true;
 
@@ -48,11 +51,10 @@ export class ChatGPTApi implements LLMApi {
         "incomplete azure config, please check it in your settings page",
       );
     }
-    const envCode = process.env.CODE;
-    if(envCode?.includes(accessStore.accessCode) && accessStore.openaiUrl == "/api/openai"){
+
+    if (envCodeArray.includes(accessStore.accessCode) && accessStore.openaiUrl == "/api/openai") {
       accessStore.openaiUrl = process.env.BASE_URL || "";
     }
-    console.log(accessStore.openaiUrl);
     let baseUrl = isAzure ? accessStore.azureUrl : accessStore.openaiUrl;
 
     if (baseUrl.length === 0) {
