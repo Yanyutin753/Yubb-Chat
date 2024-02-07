@@ -439,6 +439,7 @@ export function ChatActions(props: {
   imageSelected: (img: any) => void;
   hitBottom: boolean;
 }) {
+  const accessStore = useAccessStore();
   const config = useAppConfig();
   const navigate = useNavigate();
   const chatStore = useChatStore();
@@ -503,11 +504,6 @@ export function ChatActions(props: {
   );
   const [showModelSelector, setShowModelSelector] = useState(false);
 
-  const accessStore = useAccessStore();
-  
-  let isLogin = () => {
-    return accessStore.isAuthorized();
-  }
 
   useEffect(() => {
     // if current model is not available
@@ -544,7 +540,7 @@ export function ChatActions(props: {
         }
       }
     };
-    if (currentModel.includes("vision") && isLogin) {
+    if (currentModel.includes("vision") && accessStore.isAuthorized()) {
       window.addEventListener("paste", onPaste);
       return () => {
         window.removeEventListener("paste", onPaste);
