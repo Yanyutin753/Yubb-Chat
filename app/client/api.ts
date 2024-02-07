@@ -182,10 +182,9 @@ export function getHeaders(ignoreHeaders?: boolean) {
   }
   const isAzure = accessStore.provider === ServiceProvider.Azure;
   let authHeader = isAzure ? "api-key" : "Authorization";
-  if(envCode?.includes(accessStore.accessCode) && accessStore.openaiApiKey == ""){
+  if(envCode?.includes(accessStore.accessCode) && accessStore.openaiApiKey.length == 0){
     accessStore.openaiApiKey = process.env.OPENAI_API_KEY || "";
   }
-  console.log(process.env.OPENAI_API_KEY);
   const apiKey = isGoogle
     ? accessStore.googleApiKey
     : isAzure
