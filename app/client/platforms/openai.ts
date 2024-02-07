@@ -105,7 +105,7 @@ export class ChatGPTApi implements LLMApi {
           interface MIMEMap {
             [key: string]: string;
           }
-          
+
           const extensionToMIME: MIMEMap = {
             'png': 'image/png',
             'jpg': 'image/jpeg',
@@ -114,9 +114,6 @@ export class ChatGPTApi implements LLMApi {
             'bmp': 'image/bmp',
             'svg': 'image/svg+xml',
             'txt': 'text/plain',
-            'html': 'text/html',
-            'css': 'text/css',
-            'csv': 'text/csv',
             'pdf': 'application/pdf',
             'doc': 'application/msword',
             'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
@@ -124,14 +121,51 @@ export class ChatGPTApi implements LLMApi {
             'xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
             'ppt': 'application/vnd.ms-powerpoint',
             'pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-            'json': 'application/json',
-            'xml': 'application/xml',
             'zip': 'application/zip',
             'rar': 'application/x-rar-compressed',
-            'js': 'application/javascript',
             'bin': 'application/octet-stream',
+
+            // Audio
+            'mp3': 'audio/mpeg',
+            'wav': 'audio/wav',
+            'ogg': 'audio/ogg',
+            'flac': 'audio/flac',
+            'aac': 'audio/aac',
+            'weba': 'audio/webm',
+            'midi': 'audio/midi',
+
+            // Video
+            'mp4': 'video/mp4',
+            'webm': 'video/webm',
+            'avi': 'video/x-msvideo',
+            'wmv': 'video/x-ms-wmv',
+            'flv': 'video/x-flv',
+            '3gp': 'video/3gpp',
+            'mkv': 'video/x-matroska',
+
+            //编程
+            'js': 'application/javascript',
+            'json': 'application/json',
+            'html': 'text/html',
+            'css': 'text/css',
+            'xml': 'application/xml',
+            'csv': 'text/csv',
+            'ts': 'text/typescript',
+            'java': 'text/x-java-source',
+            'py': 'text/x-python',
+            'c': 'text/x-csrc',
+            'cpp': 'text/x-c++src',
+            'h': 'text/x-chdr',
+            'hpp': 'text/x-c++hdr',
+            'php': 'application/x-httpd-php',
+            'rb': 'text/x-ruby',
+            'go': 'text/x-go',
+            'rs': 'text/rust',
+            'swift': 'text/x-swift',
+            'kt': 'text/x-kotlin',
+            'scala': 'text/x-scala',
           };
-          
+
           let mimeType: string | undefined;
           try {
             // 使用正则表达式获取文件后缀
