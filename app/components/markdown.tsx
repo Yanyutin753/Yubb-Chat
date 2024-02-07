@@ -123,8 +123,9 @@ function _MarkDownContent(props: { content: string; imageBase64?: string }) {
   );
 
   // 判断文件路径
-  const isImage = (base64: any) => {
-    return base64.endsWith('.png');
+  const isImage = (filename: any) => {
+    const imageExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp', '.tiff'];
+    return imageExtensions.some(ext => filename.toLowerCase().endsWith(ext));
   };
 
   const show_filename = (base64: any) => {
