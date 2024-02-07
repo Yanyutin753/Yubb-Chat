@@ -935,12 +935,6 @@ export function Settings() {
                           (access) =>
                             (access.useCustomConfig = e.currentTarget.checked),
                         );
-                        if (accessStore.accessCode == "yyandywt99" && e.currentTarget.checked == false) {
-                          accessStore.update(access => {
-                            access.openaiUrl = "";
-                            access.openaiApiKey = "";
-                          });
-                        }
                       }
                     }
                     ></input>

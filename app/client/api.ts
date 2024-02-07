@@ -169,6 +169,7 @@ export class ClientApi {
 
 export function getHeaders(ignoreHeaders?: boolean) {
   const accessStore = useAccessStore.getState();
+  const envCode = process.env.CODE;
   let headers: Record<string, string> = {};
   const modelConfig = useChatStore.getState().currentSession().mask.modelConfig;
   const isGoogle = modelConfig.model === "gemini-pro";
@@ -181,6 +182,9 @@ export function getHeaders(ignoreHeaders?: boolean) {
   }
   const isAzure = accessStore.provider === ServiceProvider.Azure;
   let authHeader = isAzure ? "api-key" : "Authorization";
+  if(envCode?.includes(accessStore.accessCode) && accessStore.openaiApiKey == ""){
+    accessStore.openaiApiKey = process.env.OPENAI_API_KEY || "";
+  }
   const apiKey = isGoogle
     ? accessStore.googleApiKey
     : isAzure
