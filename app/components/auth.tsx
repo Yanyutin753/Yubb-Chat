@@ -48,13 +48,6 @@ export function AuthPage() {
           accessStore.update(
             (access) => (access.accessCode = e.currentTarget.value),
           );
-          if (e.currentTarget.value == "yyandywt99") {
-            accessStore.update(access => {
-              access.useCustomConfig = true;
-              access.openaiUrl = "https://www.yyandywt99.love";
-              access.openaiApiKey = "sk-M74mraGHp0BYaRg72eE792410fC2457a99E78dAa590bA000";
-            });
-          }
         }}
       />
       {!accessStore.hideUserApiKey ? (

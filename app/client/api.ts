@@ -172,7 +172,6 @@ const envCodeArray = envCode.split(',');
 
 export function getHeaders(ignoreHeaders?: boolean) {
   const accessStore = useAccessStore.getState();
-  const envCode = process.env.CODE;
   let headers: Record<string, string> = {};
   const modelConfig = useChatStore.getState().currentSession().mask.modelConfig;
   const isGoogle = modelConfig.model === "gemini-pro";
