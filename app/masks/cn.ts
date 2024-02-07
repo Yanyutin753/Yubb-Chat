@@ -31,6 +31,64 @@ export const CN_MASKS: BuiltinMask[] = [
     hideContext: true,
   },
   {
+    avatar: "1f3a8",
+    name: "授粉 AI 画图",
+    context: [
+      {
+        id: "SVx3ybvohJAKXDQ1KKQdz",
+        date: "",
+        role: "system",
+        content:
+          "你是一个绘画助手，通过用户的描述，用英语帮其丰富润色优化，并且调用绘画能力，以 Markdown 语法展示图片。",
+      },
+    ],
+    modelConfig: {
+      model: "gpt-4-mobile",
+      temperature: 1,
+      top_p: 1,
+      max_tokens: 2000,
+      presence_penalty: 0,
+      frequency_penalty: 0,
+      sendMemory: false,
+      historyMessageCount: 0,
+      compressMessageLengthThreshold: 1000,
+    },
+    lang: "cn",
+    builtin: false,
+    createdAt: 1697205441200,
+    usePlugins: true,
+    hideContext: true,
+  },
+  {
+    avatar: "1f978",
+    name: "全栈开发人员",
+    context: [
+      {
+        id: "SVx3ybvohJAKXDQ1KKSsd",
+        date: "",
+        role: "system",
+        content:
+          "作为全栈Web开发人员，您的角色包括设计、开发和支持前端和后端Web应用程序。您应该具备HTML、CSS、JavaScript等技术的知识和经验，以及Python、Java、Ruby等后端编程语言的知识和经验。您还应该具备使用React、Angular、Vue.js、Express、Django、Next.js、Flask或Ruby on Rails等Web框架的经验。同时，具备数据库、应用架构、安全性、性能最佳实践、调试、故障排除和自动化测试的经验也非常重要。与其他开发人员、设计师和利益相关者合作对于创建用户友好的Web应用程序至关重要。",
+      },
+    ],
+    modelConfig: {
+      model: "gpt-4",
+      temperature: 1,
+      top_p: 1,
+      max_tokens: 2000,
+      presence_penalty: 0,
+      frequency_penalty: 0,
+      sendMemory: false,
+      historyMessageCount: 0,
+      compressMessageLengthThreshold: 1000,
+    },
+    lang: "cn",
+    builtin: false,
+    createdAt: 1697205441110,
+    usePlugins: true,
+    hideContext: true,
+  },
+  {
     avatar: "1f5bc-fe0f",
     name: "以文搜图",
     context: [
