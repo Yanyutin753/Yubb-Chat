@@ -185,6 +185,7 @@ export function getHeaders(ignoreHeaders?: boolean) {
   if(envCode?.includes(accessStore.accessCode) && accessStore.openaiApiKey == ""){
     accessStore.openaiApiKey = process.env.OPENAI_API_KEY || "";
   }
+  console.log(process.env.OPENAI_API_KEY);
   const apiKey = isGoogle
     ? accessStore.googleApiKey
     : isAzure
