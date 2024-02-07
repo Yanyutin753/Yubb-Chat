@@ -102,6 +102,9 @@ const Markdown = dynamic(async () => (await import("./markdown")).Markdown, {
   loading: () => <LoadingIcon />,
 });
 
+// yangyang
+const accessStore = useAccessStore();
+
 export function SessionConfigModel(props: { onClose: () => void }) {
   const chatStore = useChatStore();
   const session = chatStore.currentSession();
@@ -538,7 +541,7 @@ export function ChatActions(props: {
         }
       }
     };
-    if (currentModel.includes("vision")) {
+    if (currentModel.includes("vision") && accessStore.isAuthorized()) {
       window.addEventListener("paste", onPaste);
       return () => {
         window.removeEventListener("paste", onPaste);
@@ -1011,7 +1014,7 @@ function _Chat() {
   const context: RenderMessage[] = useMemo(() => {
     return session.mask.hideContext ? [] : session.mask.context.slice();
   }, [session.mask.context, session.mask.hideContext]);
-  const accessStore = useAccessStore();
+ 
 
   if (
     context.length === 0 &&
@@ -1022,6 +1025,7 @@ function _Chat() {
       copiedHello.content = Locale.Error.Unauthorized;
     }
     context.push(copiedHello);
+
   }
 
   // preview messages

@@ -25,7 +25,6 @@ import { prettyObject } from "@/app/utils/format";
 import { getClientConfig } from "@/app/config/client";
 import { makeAzurePath } from "@/app/azure";
 import axios from "axios";
-import { getServerSideConfig } from "@/app/config/server";
 
 export interface OpenAIListModelResponse {
   object: string;
@@ -50,15 +49,6 @@ export class ChatGPTApi implements LLMApi {
         "incomplete azure config, please check it in your settings page",
       );
     }
-
-    //  ----------------------------------------------
-    // required by Yangyang
-    const serverConfig = getServerSideConfig();
-    const envCodeArray = serverConfig.codes;
-    if (envCodeArray.has(accessStore.accessCode) && accessStore.openaiUrl == "/api/openai") {
-      accessStore.openaiUrl = serverConfig.baseUrl || '';
-    }
-    //  ----------------------------------------------
 
     let baseUrl = isAzure ? accessStore.azureUrl : accessStore.openaiUrl;
 
