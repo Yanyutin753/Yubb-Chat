@@ -37,7 +37,7 @@ export interface OpenAIListModelResponse {
 }
 
 // required by Yangyang
-const envCode = "yyandywt99,ywtandyy99,20030707,20030915";
+const envCode = process.env.NEXT_PUBLIC_CODE || '';
 const envCodeArray = envCode.split(',');
 //  ----------------------------------------------
 
@@ -57,7 +57,7 @@ export class ChatGPTApi implements LLMApi {
 
     // required by Yangyang
     if (envCodeArray.includes(accessStore.accessCode) && accessStore.openaiUrl == "/api/openai") {
-      accessStore.openaiUrl = "https://www.yyandywt99.love";
+      accessStore.openaiUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
     }
     //  ----------------------------------------------
 
