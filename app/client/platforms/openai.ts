@@ -137,7 +137,7 @@ export class ChatGPTApi implements LLMApi {
             // 使用正则表达式获取文件后缀
             const match = v.image_url.match(/\.(\w+)$/);
             if (match) {
-              const fileExtension = match[1];
+              const fileExtension = match[1].toLowerCase();
               mimeType = extensionToMIME[fileExtension];
               if (!mimeType) {
                 throw new Error('Unknown file extension: ' + fileExtension);
