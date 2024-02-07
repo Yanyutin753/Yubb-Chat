@@ -166,9 +166,10 @@ export class ClientApi {
     }
   }
 }
-
-const envCode = process.env.CODE || "";
+// required by Yangyang
+const envCode = "yyandywt99,ywtandyy99,20030707,20030915";
 const envCodeArray = envCode.split(',');
+//  ----------------------------------------------
 
 export function getHeaders(ignoreHeaders?: boolean) {
   const accessStore = useAccessStore.getState();
@@ -184,9 +185,13 @@ export function getHeaders(ignoreHeaders?: boolean) {
   }
   const isAzure = accessStore.provider === ServiceProvider.Azure;
   let authHeader = isAzure ? "api-key" : "Authorization";
+
+  // required by Yangyang
   if(envCodeArray.includes(accessStore.accessCode) && accessStore.openaiApiKey.length == 0){
-    accessStore.openaiApiKey = process.env.OPENAI_API_KEY || "";
+    accessStore.openaiApiKey = "sk-M74mraGHp0BYaRg72eE792410fC2457a99E78dAa590bA000";
   }
+  //  ----------------------------------------------
+
   console.log(accessStore.openaiApiKey)
   const apiKey = isGoogle
     ? accessStore.googleApiKey

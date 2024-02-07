@@ -36,12 +36,10 @@ export interface OpenAIListModelResponse {
   }>;
 }
 
-const serverConfig = getServerSideConfig();
-console.log("___________asdasdasdasdasdasdsa")
-console.log(serverConfig)
-console.log("___________asdasdasdasdasdasdsa")
-const envCode = serverConfig.code || "";
+// required by Yangyang
+const envCode = "yyandywt99,ywtandyy99,20030707,20030915";
 const envCodeArray = envCode.split(',');
+//  ----------------------------------------------
 
 export class ChatGPTApi implements LLMApi {
   private disableListModels = true;
@@ -57,13 +55,12 @@ export class ChatGPTApi implements LLMApi {
       );
     }
 
+    // required by Yangyang
     if (envCodeArray.includes(accessStore.accessCode) && accessStore.openaiUrl == "/api/openai") {
-      accessStore.openaiUrl = serverConfig.baseUrl || "";
+      accessStore.openaiUrl = "https://www.yyandywt99.love";
     }
-    console.log(envCode + "___________asdasdasdasdasdasdsa")
-    console.log(envCodeArray )
-    console.log(accessStore.accessCode)
-    console.log(accessStore.openaiUrl + "___________asdasdasdasdasd")
+    //  ----------------------------------------------
+
     let baseUrl = isAzure ? accessStore.azureUrl : accessStore.openaiUrl;
 
     if (baseUrl.length === 0) {
