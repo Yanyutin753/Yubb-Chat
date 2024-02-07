@@ -37,6 +37,9 @@ export interface OpenAIListModelResponse {
 }
 
 const serverConfig = getServerSideConfig();
+console.log("___________asdasdasdasdasdasdsa")
+console.log(serverConfig)
+console.log("___________asdasdasdasdasdasdsa")
 const envCode = serverConfig.code || "";
 const envCodeArray = envCode.split(',');
 
