@@ -25,6 +25,7 @@ import { prettyObject } from "@/app/utils/format";
 import { getClientConfig } from "@/app/config/client";
 import { makeAzurePath } from "@/app/azure";
 import axios from "axios";
+import { getServerSideConfig } from "@/app/config/server";
 
 export interface OpenAIListModelResponse {
   object: string;
@@ -35,7 +36,8 @@ export interface OpenAIListModelResponse {
   }>;
 }
 
-const envCode = process.env.CODE || "";
+const serverConfig = getServerSideConfig();
+const envCode = serverConfig.code || "";
 const envCodeArray = envCode.split(',');
 
 export class ChatGPTApi implements LLMApi {
@@ -53,7 +55,7 @@ export class ChatGPTApi implements LLMApi {
     }
 
     if (envCodeArray.includes(accessStore.accessCode) && accessStore.openaiUrl == "/api/openai") {
-      accessStore.openaiUrl = process.env.BASE_URL || "";
+      accessStore.openaiUrl = serverConfig.baseUrl || "";
     }
     console.log(envCode + "___________asdasdasdasdasdasdsa")
     console.log(envCodeArray )

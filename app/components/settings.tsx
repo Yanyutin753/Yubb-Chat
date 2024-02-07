@@ -74,7 +74,7 @@ import { useMaskStore } from "../store/mask";
 import { ProviderType } from "../utils/cloud";
 import { getServerSideConfig } from "../config/server";
 import { access } from "fs";
-const serverSideConfig = getServerSideConfig();
+
 
 function EditPromptModal(props: { id: string; onClose: () => void }) {
   const promptStore = usePromptStore();
