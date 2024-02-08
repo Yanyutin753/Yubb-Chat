@@ -209,7 +209,7 @@ export const DEFAULT_MODELS = [
     },
   },
   {
-    name: "coze",
+    name: "coze-3.5",
     available: true,
     provider: {
       id: "coze",
@@ -218,7 +218,25 @@ export const DEFAULT_MODELS = [
     },
   },
   {
-    name: "coze-vision",
+    name: "coze-3.5-vision",
+    available: true,
+    provider: {
+      id: "coze",
+      providerName: "Coze",
+      providerType: "coze",
+    },
+  },
+  {
+    name: "coze-4",
+    available: true,
+    provider: {
+      id: "coze",
+      providerName: "Coze",
+      providerType: "coze",
+    },
+  },
+  {
+    name: "coze-4-vision",
     available: true,
     provider: {
       id: "coze",
