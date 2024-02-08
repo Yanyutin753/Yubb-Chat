@@ -119,6 +119,15 @@ export const KnowledgeCutOffDate: Record<string, string> = {
 
 export const DEFAULT_MODELS = [
   {
+    name: "gpt-3.5-turbo",
+    available: true,
+    provider: {
+      id: "openai",
+      providerName: "OpenAI",
+      providerType: "openai",
+    },
+  },
+  {
     name: "gpt-4",
     available: true,
     provider: {
@@ -128,12 +137,30 @@ export const DEFAULT_MODELS = [
     },
   },
   {
-    name: "gpt-4-s",
+    name: "coze-3.5",
     available: true,
     provider: {
-      id: "openai",
-      providerName: "OpenAI",
-      providerType: "openai",
+      id: "coze",
+      providerName: "Coze",
+      providerType: "coze",
+    },
+  },
+  {
+    name: "coze-4",
+    available: true,
+    provider: {
+      id: "coze",
+      providerName: "Coze",
+      providerType: "coze",
+    },
+  },
+  {
+    name: "gemini-pro",
+    available: true,
+    provider: {
+      id: "google",
+      providerName: "Google",
+      providerType: "google",
     },
   },
   {
@@ -145,24 +172,7 @@ export const DEFAULT_MODELS = [
       providerType: "openai",
     },
   },
-  {
-    name: "gpt-4-vision-preview",
-    available: true,
-    provider: {
-      id: "openai",
-      providerName: "OpenAI",
-      providerType: "openai",
-    },
-  },
-  {
-    name: "gpt-3.5-turbo",
-    available: true,
-    provider: {
-      id: "openai",
-      providerName: "OpenAI",
-      providerType: "openai",
-    },
-  },
+
   {
     name: "bing-Creative",
     available: true,
@@ -200,24 +210,6 @@ export const DEFAULT_MODELS = [
     },
   },
   {
-    name: "gemini-pro",
-    available: true,
-    provider: {
-      id: "google",
-      providerName: "Google",
-      providerType: "google",
-    },
-  },
-  {
-    name: "coze-3.5",
-    available: true,
-    provider: {
-      id: "coze",
-      providerName: "Coze",
-      providerType: "coze",
-    },
-  },
-  {
     name: "coze-3.5-vision",
     available: true,
     provider: {
@@ -226,8 +218,9 @@ export const DEFAULT_MODELS = [
       providerType: "coze",
     },
   },
+
   {
-    name: "coze-4",
+    name: "coze-4-vision",
     available: true,
     provider: {
       id: "coze",
@@ -236,12 +229,12 @@ export const DEFAULT_MODELS = [
     },
   },
   {
-    name: "coze-4-vision",
+    name: "gpt-4-vision-preview",
     available: true,
     provider: {
-      id: "coze",
-      providerName: "Coze",
-      providerType: "coze",
+      id: "openai",
+      providerName: "OpenAI",
+      providerType: "openai",
     },
   },
 ] as const;
