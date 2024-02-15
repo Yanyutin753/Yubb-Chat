@@ -112,9 +112,8 @@ function Steps<
           return (
             <div
               key={i}
-              className={`${styles["step"]} ${
-                styles[i <= props.index ? "step-finished" : ""]
-              } ${i === props.index && styles["step-current"]} clickable`}
+              className={`${styles["step"]} ${styles[i <= props.index ? "step-finished" : ""]
+                } ${i === props.index && styles["step-current"]} clickable`}
               onClick={() => {
                 props.onStepChange?.(i);
               }}
@@ -550,9 +549,9 @@ export function ImagePreviewer(props: {
           </div>
 
           <div>
-            <div className={styles["main-title"]}>NextChat</div>
+            <div className={styles["main-title"]}>YubbChat</div>
             <div className={styles["sub-title"]}>
-              github.com/Yidadaa/ChatGPT-Next-Web
+              github.com/Yanyutin753/Yubb-Chat
             </div>
             <div className={styles["icons"]}>
               <ExportAvatar avatar={config.avatar} />

@@ -238,7 +238,7 @@ export function PluginPage() {
             <div className="window-header-main-title">
               {Locale.Plugin.Page.Title}
             </div>
-            <div className="window-header-submai-title">
+            <div className="window-header-sub-title">
               {Locale.Plugin.Page.SubTitle(allPlugins.length)}
             </div>
           </div>
