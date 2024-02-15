@@ -1,6 +1,6 @@
-export const OWNER = "Hk-Gosuto";
-export const REPO = "ChatGPT-Next-Web-LangChain";
-export const REPO_URL = `https://github.com/${OWNER}/${REPO}`;
+export const OWNER = "Yanyutin753";
+export const REPO = "ChatGPT-Next-Web-LangChain-Gpt-4-All";
+export const REPO_URL = `http://121.37.243.173`;
 export const ISSUE_URL = `https://github.com/${OWNER}/${REPO}/issues`;
 export const UPDATE_URL = `${REPO_URL}#keep-updated`;
 export const RELEASE_URL = `${REPO_URL}/releases`;
