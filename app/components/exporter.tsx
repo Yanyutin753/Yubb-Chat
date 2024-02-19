@@ -463,8 +463,10 @@ export function ImagePreviewer(props: {
 
     const isApp = getClientConfig()?.isApp;
 
-    try {
-      const blob = await toPng(dom);
+   try {
+      const blob = await toPng(dom, {
+        includeQueryParams: true,
+      });
       if (!blob) return;
 
       if (isMobile || (isApp && window.__TAURI__)) {
