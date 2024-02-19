@@ -515,25 +515,18 @@ export function ImagePreviewer(props: {
   };
 
   const markdownImageUrlCorsProcess = (markdownContent: string) => {
-    const urlCheck = new RegExp('^(https?:\\/\\/)?'+ // protocol
-      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name and extension
-      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
-      '(\\:\\d+)?'+ // port
-      '(\\/[-a-z\\d%_.~+]*)*'+ // path
-      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
-      '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    let count = 0; // 计数器，用于记录 URL 的个数
     const updatedContent = markdownContent.replace(
-      /!\[(.*?)\]\((.*?)\)/g,
-      (match, alt, url) => {
-        if (!urlCheck.test(url)) return `![${alt}](${url})`;
+      /!\[.*?\]\((.*?)\)/g,
+      (match, url) => {
+        if (!url.startsWith("http")) return `![image ${count}](${url})`;
         const updatedURL = `/api/cors?url=${encodeURIComponent(url)}`;
-        return `[image]![${alt}](${updatedURL})`;
+        return `![image ${count}](${updatedURL})`;
       },
     );
     return updatedContent;
-  };
+  }; 
   
-
   return (
     <div className={styles["image-previewer"]}>
       <PreviewActions
