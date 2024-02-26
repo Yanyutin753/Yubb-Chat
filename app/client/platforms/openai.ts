@@ -184,10 +184,11 @@ export class ChatGPTApi implements LLMApi {
           //   mimeType = 'text/plain';  // 使用通用的MIME类型
           // }
           // console.log(mimeType);
+          var url = window.location.protocol + "//" + window.location.hostname;
           message.content.push({
             type: "image_url",
             image_url: {
-              url: `${v.image_url}`,
+              url: `${url}${v.image_url}`,
             },
           });
         }
