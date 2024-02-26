@@ -188,7 +188,7 @@ export class ChatGPTApi implements LLMApi {
           message.content.push({
             type: "image_url",
             image_url: {
-              url: `${url}${v.image_url}`,
+              url: encodeURI(`${url}${v.image_url}`),
             },
           });
         }
