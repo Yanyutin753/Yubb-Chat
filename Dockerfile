@@ -36,6 +36,7 @@ ENV PROXY_URL=""
 ENV OPENAI_API_KEY=""
 ENV GOOGLE_API_KEY=""
 ENV CODE=""
+ENV NEXT_PUBLIC_ENABLE_BASE64=0
 
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
