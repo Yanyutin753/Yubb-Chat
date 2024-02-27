@@ -22,7 +22,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: yangclivia/yubb-chat:latest
+          images: yangclivia/yubb-chat
           tags: |
             type=raw,value=latest
             type=ref,event=tag
