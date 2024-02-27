@@ -173,7 +173,7 @@ export class ChatGPTApi implements LLMApi {
             try {
               // 使用正则表达式获取文件后缀
               const match = v.image_url.match(/\.(\w+)$/);
-              if (match) {
+              if (match && match[1]) {
                 const fileExtension = match[1].toLowerCase();
                 mimeType = extensionToMIME[fileExtension];
                 if (!mimeType) {
@@ -189,6 +189,11 @@ export class ChatGPTApi implements LLMApi {
             image_url_data = `data:${mimeType};base64,${base64Data}`
           }
           else {
+            const match = v.image_url.match(/\.(\w+)$/);
+            if (match && match[1]) {
+                const fileExtension = match[1].toLowerCase();
+                v.image_url = v.image_url.replace(/\.\w+$/, '.' + fileExtension);
+            }
             var port = window.location.port ? ':' + window.location.port : '';
             var url = window.location.protocol + "//" + window.location.hostname + port;
             image_url_data = encodeURI(`${url}${v.image_url}`)
