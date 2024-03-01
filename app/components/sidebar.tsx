@@ -11,8 +11,9 @@ import CloseIcon from "../icons/close.svg";
 import DeleteIcon from "../icons/delete.svg";
 import MaskIcon from "../icons/mask.svg";
 import PluginIcon from "../icons/plugin.svg";
-import DragIcon from "../icons/drag.svg";
 import SearchIcon from "../icons/search.svg";
+import DragIcon from "../icons/drag.svg";
+
 import Locale from "../locales";
 
 import { useAppConfig, useChatStore } from "../store";
@@ -72,7 +73,6 @@ function useDragSideBar() {
       }
     });
   };
-
   const expandSidebar = () => {
     config.update((config) => (config.sidebarWidth = MAX_SIDEBAR_WIDTH));
   };
@@ -159,6 +159,7 @@ export function SideBar(props: { className?: string }) {
     setIsSearching(false);
     searchBarRef.current?.clearInput();
   };
+
   useHotKey();
 
   return (
@@ -171,7 +172,7 @@ export function SideBar(props: { className?: string }) {
         transition: isMobileScreen && isIOSMobile ? "none" : undefined,
       }}
     >
-      <div className={styles["sidebar-header"]} data-tauri-drag-region>
+     <div className={styles["sidebar-header"]} data-tauri-drag-region>
         <div className={styles["sidebar-title"]} data-tauri-drag-region>
           Yubb Castle
         </div>
@@ -203,21 +204,21 @@ export function SideBar(props: { className?: string }) {
           className={styles["sidebar-bar-button"]}
           onClick={() => navigate(Path.Plugins, { state: { fromHome: true } })}
           shadow
-          {shouldNarrow && (
-            <IconButton
-              icon={<SearchIcon />}
-              className={styles["sidebar-bar-button"]}
-              onClick={() => {
-                expandSidebar();
-                // use setTimeout to avoid the input element not ready
-                setTimeout(() => {
-                  searchBarRef.current?.inputElement?.focus();
-                }, 0);
-              }}
-              shadow
-            />
-          )}
         />
+        {shouldNarrow && (
+          <IconButton
+            icon={<SearchIcon />}
+            className={styles["sidebar-bar-button"]}
+            onClick={() => {
+              expandSidebar();
+              // use setTimeout to avoid the input element not ready
+              setTimeout(() => {
+                searchBarRef.current?.inputElement?.focus();
+              }, 0);
+            }}
+            shadow
+          />
+        )}
       </div>
 
       <div
