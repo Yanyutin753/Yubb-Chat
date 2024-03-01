@@ -163,8 +163,9 @@ export function SideBar(props: { className?: string }) {
 
   return (
     <div
-      className={`${styles.sidebar} ${props.className} ${shouldNarrow && styles["narrow-sidebar"]
-        }`}
+      className={`${styles.sidebar} ${props.className} ${
+        shouldNarrow && styles["narrow-sidebar"]
+      }`}
       style={{
         // #3016 disable transition on ios mobile screen
         transition: isMobileScreen && isIOSMobile ? "none" : undefined,
