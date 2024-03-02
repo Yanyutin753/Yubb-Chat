@@ -1,5 +1,5 @@
 <svg class="heart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
     <path
         d="M12 20.4C9.47 17.98 2 13.36 2 7.63 2 4.75 4.41 2 7.5 2c1.61 0 3.16.79 4.08 2.09C12.34 2.79 13.89 2 15.5 2 18.59 2 21 4.75 21 7.63c0 5.73-7.47 10.35-10 12.77"
-        stroke="black" stroke-width = "1.7" fill="white" />
+        stroke="black" stroke-width = "1.7" fill="none" />
 </svg>
