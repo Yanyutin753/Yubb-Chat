@@ -10,8 +10,8 @@ import { GoogleTagManager } from "@next/third-parties/google";
 const serverConfig = getServerSideConfig();
 
 export const metadata: Metadata = {
-  title: "Welcome to Yubb Castle",
-  description: "Welcome to Yubb Castle",
+  title: "Welcome to Yubb Chat",
+  description: "Welcome to Yubb Chat",
   viewport: {
     width: "device-width",
     initialScale: 1,
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     { media: "(prefers-color-scheme: dark)", color: "#1b262a" },
   ],
   appleWebApp: {
-    title: "Welcome to Yubb Castle",
+    title: "Welcome to Yubb Chat",
     statusBarStyle: "default",
   },
 };

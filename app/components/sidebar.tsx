@@ -174,10 +174,10 @@ export function SideBar(props: { className?: string }) {
     >
      <div className={styles["sidebar-header"]} data-tauri-drag-region>
         <div className={styles["sidebar-title"]} data-tauri-drag-region>
-          Yubb Castle
+          Yubb Chat
         </div>
         <div className={styles["sidebar-sub-title"]}>
-          Welcome to magic fairy castle.
+          Welcome to Yubb Chat.
         </div>
         <div className={styles["sidebar-logo"] + " no-dark"}>
           <ChatGptIcon />
