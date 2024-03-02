@@ -8,8 +8,8 @@
     "withGlobalTauri": true
   },
   "package": {
-    "productName": "Magic Fairy Castle",
-    "version": "2.10.1"
+    "productName": "Yubb Castle",
+    "version": "2.10.4"
   },
   "tauri": {
     "allowlist": {
@@ -104,7 +104,7 @@
         "fullscreen": false,
         "height": 600,
         "resizable": true,
-        "title": "Magic Fairy Castle",
+        "title": "Yubb Castle",
         "width": 960,
         "hiddenTitle": true,
         "titleBarStyle": "Overlay"
