@@ -373,17 +373,17 @@ function ChatAction(props: {
       style={
         props.icon && !props.loding
           ? ({
-            "--icon-width": `${width.icon}px`,
-            "--full-width": `${width.full}px`,
-            ...props.style,
-          } as React.CSSProperties)
+              "--icon-width": `${width.icon}px`,
+              "--full-width": `${width.full}px`,
+              ...props.style,
+            } as React.CSSProperties)
           : props.loding
-            ? ({
+          ? ({
               "--icon-width": `30px`,
               "--full-width": `30px`,
               ...props.style,
             } as React.CSSProperties)
-            : props.style
+          : props.style
       }
     >
       {props.icon ? (
@@ -439,7 +439,6 @@ export function ChatActions(props: {
   imageSelected: (img: any) => void;
   hitBottom: boolean;
 }) {
-  const accessStore = useAccessStore();
   const config = useAppConfig();
   const navigate = useNavigate();
   const chatStore = useChatStore();
@@ -504,7 +503,6 @@ export function ChatActions(props: {
   );
   const [showModelSelector, setShowModelSelector] = useState(false);
 
-
   useEffect(() => {
     // if current model is not available
     // switch to first available model
@@ -540,7 +538,7 @@ export function ChatActions(props: {
         }
       }
     };
-    if (currentModel.includes("vision")) {
+    if (currentModel.includes("vision") || currentModel.includes("gizmo")) {
       window.addEventListener("paste", onPaste);
       return () => {
         window.removeEventListener("paste", onPaste);
@@ -611,7 +609,7 @@ export function ChatActions(props: {
 
         {config.pluginConfig.enable &&
           /^gpt(?!.*03\d{2}$).*$/.test(currentModel) &&
-          !currentModel.includes("vision") && (
+          (!currentModel.includes("vision") && !currentModel.includes("gizmo")) && (
             <ChatAction
               onClick={switchUsePlugins}
               text={
@@ -622,10 +620,10 @@ export function ChatActions(props: {
               icon={usePlugins ? <EnablePluginIcon /> : <DisablePluginIcon />}
             />
           )}
-        {currentModel.includes("vision") && (
+        {(currentModel.includes("vision") || currentModel.includes("gizmo")) && (
           <ChatAction
             onClick={selectImage}
-            text="选择文件"
+            text="选择图片"
             loding={uploadLoading}
             icon={<UploadIcon />}
             innerNode={
@@ -1024,7 +1022,6 @@ function _Chat() {
       copiedHello.content = Locale.Error.Unauthorized;
     }
     context.push(copiedHello);
-
   }
 
   // preview messages
@@ -1034,28 +1031,28 @@ function _Chat() {
       .concat(
         isLoading
           ? [
-            {
-              ...createMessage({
-                role: "assistant",
-                content: "……",
-              }),
-              preview: true,
-            },
-          ]
+              {
+                ...createMessage({
+                  role: "assistant",
+                  content: "……",
+                }),
+                preview: true,
+              },
+            ]
           : [],
       )
       .concat(
         userInput.length > 0 && config.sendPreviewBubble
           ? [
-            {
-              ...createMessage({
-                role: "user",
-                content: userInput,
-                image_url: userImage?.fileUrl,
-              }),
-              preview: true,
-            },
-          ]
+              {
+                ...createMessage({
+                  role: "user",
+                  content: userInput,
+                  image_url: userImage?.fileUrl,
+                }),
+                preview: true,
+              },
+            ]
           : [],
       );
   }, [
@@ -1152,7 +1149,7 @@ function _Chat() {
         if (payload.key || payload.url) {
           showConfirm(
             Locale.URLCommand.Settings +
-            `\n${JSON.stringify(payload, null, 4)}`,
+              `\n${JSON.stringify(payload, null, 4)}`,
           ).then((res) => {
             if (!res) return;
             if (payload.key) {
@@ -1415,7 +1412,7 @@ function _Chat() {
                       defaultShow={i >= messages.length - 6}
                     />
                   </div>
-                  {!isUser && message?.model?.includes("vision") && (
+                  {!isUser && (message.model?.includes("vision") || message.model?.includes("gizmo")) && (
                     <div
                       className={[
                         styles["chat-message-actions"],
