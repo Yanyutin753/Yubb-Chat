@@ -61,11 +61,11 @@ export function PluginConfigList(props: {
       >
         <input
           type="checkbox"
-          checked={props.pluginConfig.UpdateTypes}
+          checked={props.pluginConfig.updateTypes}
           onChange={(e) =>
             props.updateConfig(
               (config) =>
-                (config.UpdateTypes = e.currentTarget.checked),
+                (config.updateTypes = e.currentTarget.checked),
             )
           }
         ></input>
