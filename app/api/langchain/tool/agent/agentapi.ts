@@ -54,6 +54,7 @@ export interface RequestBody {
   apiKey?: string;
   maxIterations: number;
   returnIntermediateSteps: boolean;
+  updateTypes: boolean;
   useTools: (undefined | string)[];
 }
 

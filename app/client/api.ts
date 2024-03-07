@@ -33,6 +33,7 @@ export interface LLMConfig {
 export interface LLMAgentConfig {
   maxIterations: number;
   returnIntermediateSteps: boolean;
+  updateTypes: boolean;
   useTools?: (string | undefined)[];
 }
 

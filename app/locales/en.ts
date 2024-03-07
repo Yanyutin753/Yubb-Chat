@@ -377,6 +377,10 @@ const en: LocaleType = {
         Title: "Return Intermediate Steps",
         SubTitle: "Return Intermediate Steps",
       },
+      UpdateType: {
+        Title: "Upload type",
+        SubTitle: "Upload Base64 format message",
+      },
     },
   },
   Store: {

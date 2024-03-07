@@ -371,6 +371,10 @@ const cn = {
         Title: "返回中间步骤",
         SubTitle: "是否返回插件调用的中间步骤",
       },
+      UpdateType: {
+        Title: "上传类型",
+        SubTitle: "是否上传Base64格式消息",
+      },
     },
   },
   Store: {

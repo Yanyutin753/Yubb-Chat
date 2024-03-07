@@ -79,6 +79,7 @@ export class ChatGPTApi implements LLMApi {
 
   async chat(options: ChatOptions) {
     const messages: any[] = [];
+    const accessStore = useAccessStore.getState();
 
     const getImageBase64Data = async (url: string) => {
       const response = await axios.get(url, { responseType: "arraybuffer" });
@@ -104,7 +105,7 @@ export class ChatGPTApi implements LLMApi {
         });
         if (v.image_url) {
           let image_url_data = "";
-          if (process.env.NEXT_PUBLIC_ENABLE_BASE64) {
+          if (accessStore.updateTypes) {
             var base64Data = await getImageBase64Data(v.image_url);
             let mimeType: string | null;
             try {
@@ -347,6 +348,7 @@ export class ChatGPTApi implements LLMApi {
       baseUrl: baseUrl,
       maxIterations: options.agentConfig.maxIterations,
       returnIntermediateSteps: options.agentConfig.returnIntermediateSteps,
+      updateTypes: options.agentConfig.updateTypes,
       useTools: options.agentConfig.useTools,
     };
 
