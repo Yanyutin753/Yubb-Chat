@@ -28,19 +28,18 @@ export interface LLMConfig {
   stream?: boolean;
   presence_penalty?: number;
   frequency_penalty?: number;
+  updateTypes?: boolean;
 }
 
 export interface LLMAgentConfig {
   maxIterations: number;
   returnIntermediateSteps: boolean;
-  updateTypes: boolean;
   useTools?: (string | undefined)[];
 }
 
 export interface ChatOptions {
   messages: RequestMessage[];
   config: LLMConfig;
-  agentConfig: LLMAgentConfig;
   onToolUpdate?: (toolName: string, toolInput: string) => void;
   onUpdate?: (message: string, chunk: string) => void;
   onFinish: (message: string) => void;

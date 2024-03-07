@@ -364,6 +364,10 @@ const en: LocaleType = {
       SubTitle:
         "A larger value decreasing the likelihood to repeat the same line",
     },
+    UpdateType: {
+      Title: "Upload type",
+      SubTitle: "Upload Base64 format message",
+    },
     Plugin: {
       Enable: {
         Title: "Enable Plugin",
@@ -376,10 +380,6 @@ const en: LocaleType = {
       ReturnIntermediateStep: {
         Title: "Return Intermediate Steps",
         SubTitle: "Return Intermediate Steps",
-      },
-      UpdateType: {
-        Title: "Upload type",
-        SubTitle: "Upload Base64 format message",
       },
     },
   },

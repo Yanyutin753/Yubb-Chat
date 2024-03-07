@@ -55,21 +55,6 @@ export function PluginConfigList(props: {
           }
         ></input>
       </ListItem>
-      <ListItem
-        title={Locale.Settings.Plugin.UpdateType.Title}
-        subTitle={Locale.Settings.Plugin.UpdateType.SubTitle}
-      >
-        <input
-          type="checkbox"
-          checked={props.pluginConfig.updateTypes}
-          onChange={(e) =>
-            props.updateConfig(
-              (config) =>
-                (config.updateTypes = e.currentTarget.checked),
-            )
-          }
-        ></input>
-      </ListItem>
     </>
   );
 }

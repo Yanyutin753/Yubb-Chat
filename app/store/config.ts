@@ -64,7 +64,6 @@ export const DEFAULT_CONFIG = {
     enable: true,
     maxIterations: 10,
     returnIntermediateSteps: true,
-    updateTypes: false,
   },
 };
 
@@ -171,7 +170,7 @@ export const useAppConfig = createPersistStore(
       if (version < 3.8) {
         state.lastUpdate = Date.now();
       }
-      
+
       if(process.env.NEXT_PUBLIC_ENABLE_BASE64){
         state.modelConfig.updateTypes = true;
       }
