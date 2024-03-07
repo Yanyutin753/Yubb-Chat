@@ -105,7 +105,7 @@ export class ChatGPTApi implements LLMApi {
         });
         if (v.image_url) {
           let image_url_data = "";
-          if (accessStore.updateTypes) {
+          if (options.agentConfig.updateTypes) {
             var base64Data = await getImageBase64Data(v.image_url);
             let mimeType: string | null;
             try {
