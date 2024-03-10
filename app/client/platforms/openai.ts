@@ -150,14 +150,23 @@ export class ChatGPTApi implements LLMApi {
               },
             });
           }
+          messages.push(message);
         }
         else {
-          message.content.push({
-            type: "text",
-            text: v.content,
-          });
+          if (options.config.model.includes("moomshot")) {
+            messages.push({
+              role: v.role,
+              content: v.content,
+            });
+          }
+          else {
+            message.content.push({
+              type: "text",
+              text: v.content,
+            });
+            messages.push(message);
+          }
         }
-        messages.push(message);
       }
     } else {
       options.messages.map((v) =>
