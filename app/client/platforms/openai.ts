@@ -125,20 +125,20 @@ export class ChatGPTApi implements LLMApi {
           else {
             const match = v.image_url.match(/\.(\w+)$/);
             if (match && match[1]) {
-                const fileExtension = match[1].toLowerCase();
-                v.image_url = v.image_url.replace(/\.\w+$/, '.' + fileExtension);
+              const fileExtension = match[1].toLowerCase();
+              v.image_url = v.image_url.replace(/\.\w+$/, '.' + fileExtension);
             }
             var port = window.location.port ? ':' + window.location.port : '';
             var url = window.location.protocol + "//" + window.location.hostname + port;
             image_url_data = encodeURI(`${url}${v.image_url}`)
           }
-          if(options.config.model.includes("moomshot")){
+          if (options.config.model.includes("moomshot")) {
             message.content.push({
               type: "text",
               text: `${image_url_data}` + v.content,
             });
           }
-          else{
+          else {
             message.content.push({
               type: "text",
               text: v.content,
@@ -150,6 +150,12 @@ export class ChatGPTApi implements LLMApi {
               },
             });
           }
+        }
+        else {
+          message.content.push({
+            type: "text",
+            text: v.content,
+          });
         }
         messages.push(message);
       }
