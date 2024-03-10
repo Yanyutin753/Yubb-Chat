@@ -132,7 +132,7 @@ export class ChatGPTApi implements LLMApi {
             var url = window.location.protocol + "//" + window.location.hostname + port;
             image_url_data = encodeURI(`${url}${v.image_url}`)
           }
-          if (options.config.model.includes("moomshot")) {
+          if (options.config.model.includes("moonshot")) {
             message.content.push({
               type: "text",
               text: `${image_url_data}` + v.content,
@@ -153,7 +153,7 @@ export class ChatGPTApi implements LLMApi {
           messages.push(message);
         }
         else {
-          if (options.config.model.includes("moomshot")) {
+          if (options.config.model.includes("moonshot")) {
             messages.push({
               role: v.role,
               content: v.content,
