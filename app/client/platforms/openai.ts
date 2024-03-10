@@ -99,48 +99,70 @@ export class ChatGPTApi implements LLMApi {
           role: v.role,
           content: [],
         };
-        message.content.push({
-          type: "text",
-          text: v.content,
-        });
         if (v.image_url) {
           let image_url_data = "";
-          if (options.config.updateTypes) {
-            var base64Data = await getImageBase64Data(v.image_url);
-            let mimeType: string | null;
-            try {
-              // 使用正则表达式获取文件后缀
-              const match = v.image_url.match(/\.(\w+)$/);
-              if (match && match[1]) {
-                const fileExtension = match[1].toLowerCase();
-                mimeType = mime.getType(fileExtension);
-                if (!mimeType) {
-                  throw new Error('Unknown file extension: ' + fileExtension);
-                }
-              } else {
-                throw new Error('Unable to extract file extension from the URL');
-              }
-            } catch (error) {
-              mimeType = 'text/plain';  // 使用通用的MIME类型
-            }
-            console.log(mimeType);
-            image_url_data = `data:${mimeType};base64,${base64Data}`
-          }
-          else {
+          if (options.config.model.includes("moonshot")) {
             const match = v.image_url.match(/\.(\w+)$/);
             if (match && match[1]) {
-                const fileExtension = match[1].toLowerCase();
-                v.image_url = v.image_url.replace(/\.\w+$/, '.' + fileExtension);
+              const fileExtension = match[1].toLowerCase();
+              v.image_url = v.image_url.replace(/\.\w+$/, '.' + fileExtension);
             }
             var port = window.location.port ? ':' + window.location.port : '';
             var url = window.location.protocol + "//" + window.location.hostname + port;
             image_url_data = encodeURI(`${url}${v.image_url}`)
+            message.content.push({
+              type: "text",
+              text: image_url_data + v.content,
+            });
           }
+          else {
+            if (options.config.updateTypes) {
+              var base64Data = await getImageBase64Data(v.image_url);
+              let mimeType: string | null;
+              try {
+                // 使用正则表达式获取文件后缀
+                const match = v.image_url.match(/\.(\w+)$/);
+                if (match && match[1]) {
+                  const fileExtension = match[1].toLowerCase();
+                  mimeType = mime.getType(fileExtension);
+                  if (!mimeType) {
+                    throw new Error('Unknown file extension: ' + fileExtension);
+                  }
+                } else {
+                  throw new Error('Unable to extract file extension from the URL');
+                }
+              } catch (error) {
+                mimeType = 'text/plain';  // 使用通用的MIME类型
+              }
+              console.log(mimeType);
+              image_url_data = `data:${mimeType};base64,${base64Data}`
+            }
+            else {
+              const match = v.image_url.match(/\.(\w+)$/);
+              if (match && match[1]) {
+                const fileExtension = match[1].toLowerCase();
+                v.image_url = v.image_url.replace(/\.\w+$/, '.' + fileExtension);
+              }
+              var port = window.location.port ? ':' + window.location.port : '';
+              var url = window.location.protocol + "//" + window.location.hostname + port;
+              image_url_data = encodeURI(`${url}${v.image_url}`)
+            }
+            message.content.push({
+              type: "text",
+              text: v.content,
+            });
+            message.content.push({
+              type: "image_url",
+              image_url: {
+                url: `${image_url_data}`,
+              },
+            });
+          }
+        }
+        else {
           message.content.push({
-            type: "image_url",
-            image_url: {
-              url: `${image_url_data}`,
-            },
+            type: "text",
+            text: v.content,
           });
         }
         messages.push(message);
