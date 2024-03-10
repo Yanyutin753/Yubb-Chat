@@ -133,9 +133,9 @@ export class ChatGPTApi implements LLMApi {
             image_url_data = encodeURI(`${url}${v.image_url}`)
           }
           if (options.config.model.includes("moonshot")) {
-            message.content.push({
-              type: "text",
-              text: `${image_url_data}` + v.content,
+            messages.push({
+              role: v.role,
+              content: `${image_url_data}` + v.content,
             });
           }
           else {
