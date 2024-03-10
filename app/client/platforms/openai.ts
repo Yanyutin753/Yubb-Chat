@@ -149,8 +149,8 @@ export class ChatGPTApi implements LLMApi {
                 url: `${image_url_data}`,
               },
             });
+            messages.push(message);
           }
-          messages.push(message);
         }
         else {
           if (options.config.model.includes("moonshot")) {
