@@ -101,7 +101,7 @@ export class ChatGPTApi implements LLMApi {
         };
         if (v.image_url) {
           let image_url_data = "";
-          if (options.config.updateTypes && !options.config.model.includes("moonshot")) {
+          if (options.config.updateTypes && !options.config.model.includes("moomshot")) {
             var base64Data = await getImageBase64Data(v.image_url);
             let mimeType: string | null;
             try {
@@ -132,10 +132,10 @@ export class ChatGPTApi implements LLMApi {
             var url = window.location.protocol + "//" + window.location.hostname + port;
             image_url_data = encodeURI(`${url}${v.image_url}`)
           }
-          if(options.config.model.includes("moonshot")){
-            messages.push({
-              role: v.role,
-              content: image_url_data + v.content,
+          if(options.config.model.includes("moomshot")){
+            message.content.push({
+              type: "text",
+              text: `${image_url_data}` + v.content,
             });
           }
           else{
@@ -149,9 +149,9 @@ export class ChatGPTApi implements LLMApi {
                 url: `${image_url_data}`,
               },
             });
-            messages.push(message);
           }
         }
+        messages.push(message);
       }
     } else {
       options.messages.map((v) =>
