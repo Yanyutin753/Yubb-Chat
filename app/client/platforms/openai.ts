@@ -119,7 +119,7 @@ export class ChatGPTApi implements LLMApi {
             var url = window.location.protocol + "//" + window.location.hostname + port;
             image_url_data = encodeURI(`${url}${v.image_url}`)
             message.push({
-              type: "text",
+              type: "url",
               url: `${image_url_data}`,
             });
           }
