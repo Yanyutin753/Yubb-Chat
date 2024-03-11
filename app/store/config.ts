@@ -172,6 +172,7 @@ export const useAppConfig = createPersistStore(
       }
 
       state.modelConfig.updateTypes = true;
+      
       return state as any;
     },
   },
