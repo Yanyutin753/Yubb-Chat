@@ -176,8 +176,15 @@ export class ChatGPTApi implements LLMApi {
       // max_tokens: Math.max(modelConfig.max_tokens, 1024),
       // Please do not ask me why not send max_tokens, no reason, this param is just shit, I dont want to explain anymore.
     };
-
-    console.log("[Request] openai payload: ", requestPayload);
+    const moonshotPayload = {
+      messages,
+      stream: options.config.stream,
+      model: modelConfig.model,
+      use_search:
+        modelConfig.model.includes("vision")
+          ? false
+          : true,
+    }
 
     const shouldStream = !!options.config.stream;
     const controller = new AbortController();
@@ -191,6 +198,13 @@ export class ChatGPTApi implements LLMApi {
         signal: controller.signal,
         headers: getHeaders(),
       };
+      if (modelConfig.model.includes("moonshot")) {
+        console.log("[Request] moonshot payload: ", moonshotPayload);
+        chatPayload.body = JSON.stringify(moonshotPayload)
+      }
+      else {
+        console.log("[Request] openai payload: ", requestPayload);
+      }
 
       // make a fetch request
       const requestTimeoutId = setTimeout(
