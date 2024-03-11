@@ -223,9 +223,7 @@ export function ModelConfigList(props: {
       >
         <input
           type="checkbox"
-          checked={
-            props.modelConfig.updateTypes
-          }
+          checked={props.modelConfig.updateTypes}
           onChange={(e) =>
             props.updateConfig(
               (config) =>
