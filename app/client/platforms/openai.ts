@@ -35,23 +35,6 @@ export interface OpenAIListModelResponse {
     root: string;
   }>;
 }
-interface Message1 {
-  type?: string;
-  url?: string;
-  role?: string;
-  content?: string;
-}
-
-interface Content {
-  type: string;
-  text?: string;
-  image_url?: { url: string };
-}
-
-interface Message2 {
-  role: string;
-  content: Content[];
-}
 
 export class ChatGPTApi implements LLMApi {
   private disableListModels = true;
@@ -105,11 +88,41 @@ export class ChatGPTApi implements LLMApi {
     };
     if (options.config.model.includes("vision") || options.config.model.includes("gizmo")) {
       for (const v of options.messages) {
-        let message: Message1[] | Message2;
-        if (options.config.model.includes("moonshot")) {
-          message = [{ role: v.role, content: v.content }]
-          if (v.image_url) {
-            let image_url_data = "";
+        let message: {
+          role: string;
+          content: {
+            type: string;
+            text?: string;
+            image_url?: { url: string };
+          }[];
+        } = {
+          role: v.role,
+          content: [],
+        };
+        if (v.image_url) {
+          let image_url_data = "";
+          if (options.config.updateTypes && !options.config.model.includes("moomshot")) {
+            var base64Data = await getImageBase64Data(v.image_url);
+            let mimeType: string | null;
+            try {
+              // 使用正则表达式获取文件后缀
+              const match = v.image_url.match(/\.(\w+)$/);
+              if (match && match[1]) {
+                const fileExtension = match[1].toLowerCase();
+                mimeType = mime.getType(fileExtension);
+                if (!mimeType) {
+                  throw new Error('Unknown file extension: ' + fileExtension);
+                }
+              } else {
+                throw new Error('Unable to extract file extension from the URL');
+              }
+            } catch (error) {
+              mimeType = 'text/plain';  // 使用通用的MIME类型
+            }
+            console.log(mimeType);
+            image_url_data = `data:${mimeType};base64,${base64Data}`
+          }
+          else {
             const match = v.image_url.match(/\.(\w+)$/);
             if (match && match[1]) {
               const fileExtension = match[1].toLowerCase();
@@ -118,62 +131,41 @@ export class ChatGPTApi implements LLMApi {
             var port = window.location.port ? ':' + window.location.port : '';
             var url = window.location.protocol + "//" + window.location.hostname + port;
             image_url_data = encodeURI(`${url}${v.image_url}`)
-            message.push({
-              type: "url",
-              url: `${image_url_data}`,
+          }
+          if (options.config.model.includes("moonshot")) {
+            messages.push({
+              role: v.role,
+              content: `${image_url_data}` + "  " + v.content,
             });
           }
-          messages.push(message);
-        } else {
-          message = {
-            role: v.role,
-            content: [],
-          };
-          message.content.push({
-            type: "text",
-            text: v.content,
-          });
-          if (v.image_url) {
-            let image_url_data = "";
-            if (options.config.updateTypes) {
-              var base64Data = await getImageBase64Data(v.image_url);
-              let mimeType: string | null;
-              try {
-                // 使用正则表达式获取文件后缀
-                const match = v.image_url.match(/\.(\w+)$/);
-                if (match && match[1]) {
-                  const fileExtension = match[1].toLowerCase();
-                  mimeType = mime.getType(fileExtension);
-                  if (!mimeType) {
-                    throw new Error('Unknown file extension: ' + fileExtension);
-                  }
-                } else {
-                  throw new Error('Unable to extract file extension from the URL');
-                }
-              } catch (error) {
-                mimeType = 'text/plain';  // 使用通用的MIME类型
-              }
-              console.log(mimeType);
-              image_url_data = `data:${mimeType};base64,${base64Data}`
-            }
-            else {
-              const match = v.image_url.match(/\.(\w+)$/);
-              if (match && match[1]) {
-                const fileExtension = match[1].toLowerCase();
-                v.image_url = v.image_url.replace(/\.\w+$/, '.' + fileExtension);
-              }
-              var port = window.location.port ? ':' + window.location.port : '';
-              var url = window.location.protocol + "//" + window.location.hostname + port;
-              image_url_data = encodeURI(`${url}${v.image_url}`)
-            }
+          else {
+            message.content.push({
+              type: "text",
+              text: v.content,
+            });
             message.content.push({
               type: "image_url",
               image_url: {
                 url: `${image_url_data}`,
               },
             });
+            messages.push(message);
           }
-          messages.push(message);
+        }
+        else {
+          if (options.config.model.includes("moonshot")) {
+            messages.push({
+              role: v.role,
+              content: v.content,
+            });
+          }
+          else {
+            message.content.push({
+              type: "text",
+              text: v.content,
+            });
+            messages.push(message);
+          }
         }
       }
     } else {
