@@ -57,7 +57,7 @@ export const DEFAULT_CONFIG = {
     compressMessageLengthThreshold: 1000,
     enableInjectSystemPrompts: true,
     // 默认为true
-    updateTypes: Boolean(process.env.NEXT_PUBLIC_ENABLE_BASE64 === '1'),
+    updateTypes: true,
     template: DEFAULT_INPUT_TEMPLATE,
   },
 
