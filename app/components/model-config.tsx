@@ -223,9 +223,7 @@ export function ModelConfigList(props: {
       >
         <input
           type="checkbox"
-          disabled={!!process.env.NEXT_PUBLIC_ENABLE_BASE64}
           checked={
-            !process.env.NEXT_PUBLIC_ENABLE_BASE64 &&
             props.modelConfig.updateTypes
           }
           onChange={(e) =>
