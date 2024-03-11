@@ -56,7 +56,8 @@ export const DEFAULT_CONFIG = {
     historyMessageCount: 4,
     compressMessageLengthThreshold: 1000,
     enableInjectSystemPrompts: true,
-    updateTypes: false,
+    // 默认为true
+    updateTypes: process.env.NEXT_PUBLIC_ENABLE_BASE64,
     template: DEFAULT_INPUT_TEMPLATE,
   },
 
