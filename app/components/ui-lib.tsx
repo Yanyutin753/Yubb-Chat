@@ -429,7 +429,7 @@ export function showImageModal(img: string) {
           src={img}
           alt="preview"
           style={{
-            maxWidth: "100%",
+            maxWidth: "50%",
           }}
         ></img>
       </div>
