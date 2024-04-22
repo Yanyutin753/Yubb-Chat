@@ -20,7 +20,7 @@
     "@aws-sdk/s3-request-presigner": "^3.414.0",
     "@fortaine/fetch-event-source": "^3.0.6",
     "@hello-pangea/dnd": "^16.5.0",
-    "@langchain/community": "^0.0.20",
+    "@langchain/community": "^0.0.50",
     "@langchain/core": "^0.1.17",
     "@langchain/openai": "^0.0.12",
     "@next/third-parties": "^14.1.0",
